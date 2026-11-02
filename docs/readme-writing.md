@@ -639,8 +639,8 @@ Mermaidでは、処理を `Process["データを変換する"]`、データを `
 ## 12. 参考実例と使い方
 
 参考実例は、読者の目的と対象CLIに合うものを選び、参照版と閲覧方法を確認します。
-本書の作者による実例として、[Tkn Excel Note の README](https://github.com/tuckn/tkn_excel_note/blob/4533f04d0fae78f2e45c293e396230794b2095b7/README.md) を挙げます。
-参照版は Git リビジョン `4533f04d0fae78f2e45c293e396230794b2095b7` に固定しています。
+本書の作者による実例として、[Tkn Excel Note の README](https://github.com/tuckn/tkn_excel_note/blob/6564da7d86a251a8a2b5ed4fc16c43a5d500e422/README.md) を挙げます。
+参照版は Git リビジョン `6564da7d86a251a8a2b5ed4fc16c43a5d500e422` に固定しています。
 参考実例から取り入れる観点は次のとおりです。
 
 - 冒頭で初回利用と詳細参照の読み方を案内する。
