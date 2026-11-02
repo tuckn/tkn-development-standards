@@ -1,4 +1,4 @@
-# tkn-development-standards
+# Tkn Development Standards — CLI開発・文書作成・YAML記述の共通規約
 
 人と生成AIが、CLIの開発・文書作成・YAML記述に共通して使う規約です。
 README・CHANGELOG・詳細文書を、人が実装の成果と根拠を確認できる入口として整えます。
