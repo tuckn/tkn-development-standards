@@ -639,7 +639,8 @@ Mermaidでは、処理を `Process["データを変換する"]`、データを `
 ## 12. 参考実例と使い方
 
 参考実例は、読者の目的と対象CLIに合うものを選び、参照版と閲覧方法を確認します。
-利用者固有の参考リポジトリは、各projectの資料または非公開の適用仕様で管理します。
+本書の作者による実例として、[Tkn Codex Chat Note Pipeline の日本語 README](https://github.com/tuckn/tkn_codex_chat_note_pipeline/blob/f06407e5db9c46c7498cdd73799c62ad6828a85d/README_ja.md) を挙げます。
+参照版は Git リビジョン `f06407e5db9c46c7498cdd73799c62ad6828a85d` に固定しています。
 参考実例から取り入れる観点は次のとおりです。
 
 - 冒頭で初回利用と詳細参照の読み方を案内する。

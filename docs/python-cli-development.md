@@ -136,10 +136,13 @@ Windowsを主な実行環境としつつ、OS固有機能を必要としない�
 - `<python_package>`とapplicationの内部識別子には、原則として
   `snake_case`を使用する。
 - CLIの実行名は、shellで入力しやすいkebab-caseを原則とする。
-- 複数のCLIをまとめてTab補完できるよう、所有者や製品群の共通prefixを採用してよい。
-  prefixの具体値は対象projectで定める。
+- 複数のCLIをまとめてTab補完できるよう、所有者や製品群の共通prefixを採用し、
+  `<prefix>-<tool-name>`としてよい。shellで`<prefix>-`まで入力してTab補完すれば、
+  名前全体を覚えていなくても自作CLIを一覧から選べる。prefixの具体値は対象projectで定める。
+  例: 本リポジトリの作者（Tuckn）は、名前から取った`tkn-`を使い、
+  `tkn-youtube-note`のように命名している。
 - 既存の公開CLI名に利用者や自動処理が依存している場合は、互換性と移行costを評価し、
-  既存名を維持する例外を認める。
+  既存名を維持する例外を認める。新規CLIや正式なrenameでは、採用したprefixを優先する。
 - `scripts/`は、Task Scheduler登録など、main CLIへ含める必要がない
   platform固有の補助処理がある場合だけ使用する。
 - `docs/`は詳細文書が必要な場合に使い、内容が分かるfile名で直下へ置くことを基本にする。
@@ -303,9 +306,9 @@ READMEには、installation直後に実行する確認commandを記載する。�
 ### 6.1 形式
 
 本書の `<namespace>` は、対象projectが決める設定・データ保存先の名前空間を表す
-placeholderである。例として `example-tools` を選ぶと、
-`~/.<namespace>/<application_id>/` は `~/.example-tools/<application_id>/`、
-`./.<namespace>/config.yaml` は `./.example-tools/config.yaml` となる。
+placeholderである。例えば本リポジトリの作者はCLIのprefixと同じ `tkn` を使っており、
+`~/.<namespace>/<application_id>/` は `~/.tkn/<application_id>/`、
+`./.<namespace>/config.yaml` は `./.tkn/config.yaml` となる。
 namespaceとapplication IDは具体値をREADMEへ記載し、placeholderをそのまま保存先にしない。
 既存projectの保存先は移行条件を定めずに変更しない。
 
@@ -395,13 +398,13 @@ request_timeout_seconds: 30
 `<application_id>`を使用する。repository名のprefixが所有者の識別だけを目的とする場合、
 application IDから省略してよい。
 
-例:
+例（本リポジトリの作者が公開しているrepository。`tkn_`は所有者の識別だけを目的とするprefix）:
 
 | Repository | Application ID | CLI |
 | --- | --- | --- |
-| `example_video_note` | `video_note` | `example-video-note` |
-| `example_receipt_pipeline` | `receipt_pipeline` | `example-receipt` |
-| `example_context_pipeline` | `context_pipeline` | `example-context` |
+| `tkn_youtube_note_pipeline` | `youtube_note_pipeline` | `tkn-youtube-note` |
+| `tkn_itadaki_data_pipeline` | `itadaki_data_pipeline` | `tkn-itadaki-pipeline` |
+| `tkn_codex_chat_note_pipeline` | `codex_chat_note_pipeline` | `tkn-codex-chat-note` |
 
 一度公開したapplication IDは、repository名を変更しても安易に変更しない。
 
@@ -1122,6 +1125,12 @@ uv build
 参照先にアクセスできない場合は、作業者が読める資料を用意する。
 参考実装が本仕様のすべてを同じ方法で実装しているとは限らない。
 個別の実装をそのままcopyするのではなく、本仕様と対象の要件を優先する。
+
+本書の初版は、作者が公開している次のrepositoryの構成と運用を参考に作成した。
+
+- [tkn_youtube_note_pipeline](https://github.com/tuckn/tkn_youtube_note_pipeline)
+- [tkn_genai_bridge](https://github.com/tuckn/tkn_genai_bridge)
+- [tkn_manictime_data_pipeline](https://github.com/tuckn/tkn_manictime_data_pipeline)
 
 ## 17. 生成AIへの依頼テンプレート
 
