@@ -269,8 +269,11 @@ README のインストール確認には `--version` の実行例を必ず載せ
 `--help` は、コマンド一覧や引数の確認方法として本文で案内します。インストール確認のコードブロックに含めるかは任意です。
 未実装の場合は実装が必要な差として報告し、README に記載するだけで要件を満たしたことにしません。実装の変更は依頼された範囲に従います。
 
-基本方針を適用する Python CLI では、作業フォルダへの移動、通常の `uv tool install .`、CLI の `--help` と `--version` による確認を含めます。
-更新後の `--reinstall` は保守、editable インストールは開発の説明に置きます。
+基本方針を適用する Python CLI では、インストールと、CLI の `--help` と `--version` による確認を含めます。
+GitHub などで公開しているリポジトリでは、clone を必要としない `uv tool install git+https://github.com/<owner>/<repository>` を利用者向けの基本の手順とします。
+更新も同じ URL で `uv tool install --reinstall git+https://github.com/<owner>/<repository>` を基本とし、保守の説明に置きます。
+この方法で入るのは公開先の既定ブランチに push 済みの内容だけであることを、更新の説明に添えます。
+clone したリポジトリでの `cd` と `uv tool install .`、`git pull` 後の `uv tool install . --reinstall`、editable インストールは、未公開のリポジトリの基本手順、または開発の説明に置きます。
 他の技術構成へ、このツール名やインストール方式をそのまま要求しません。
 
 複数の処理段階がある場合は、段階・コマンド・得られるものを対応させ、生成 AI や外部サービスを使う段階を明示します。

@@ -221,9 +221,19 @@ Windowsを主な実行環境としつつ、OS固有機能を必要としない�
 
 ### 5.1 通常のinstallationを基本にする
 
-通常の個人利用では、次の形式でrepository rootへ移動してからinstallする。
-例示している`C:\path\to\<repository-name>`は、対象repositoryの実際のfolder pathへ
-置き換える。
+GitHubなどで公開しているrepositoryでは、cloneを必要としない次の形式を、
+利用者向けの通常のinstallationとする。`<owner>`と`<repository-name>`は公開先の値へ置き換える。
+
+```shell
+uv tool install git+https://github.com/<owner>/<repository-name>
+<cli-name> --help
+```
+
+この形式では、`uv`が公開先の既定branchを取得してinstallする。必要なのは`uv`と`git`だけで、
+利用者がrepositoryをclone・`git pull`する必要はない。installされるのはpush済みの内容だけである。
+
+未公開のrepository、または手元のcloneの内容を使う場合は、repository rootへ移動してからinstallする。
+例示している`C:\path\to\<repository-name>`は、対象repositoryの実際のfolder pathへ置き換える。
 
 ```shell
 cd "C:\path\to\<repository-name>"
@@ -231,10 +241,11 @@ uv tool install .
 <cli-name> --help
 ```
 
-READMEのinstallation例では`cd`を省略しない。利用者が想定current working directoryを
+READMEのこの形式の例では`cd`を省略しない。利用者が想定current working directoryを
 推測せずに済み、`.`が対象repositoryを意味することをcommand列だけで確認できるようにする。
+公開repositoryのREADMEでは、clone先からのinstallationを開発の説明に置く。
 
-日常利用するCLIのPython dependencyは、原則として`uv tool install .`だけで
+日常利用するCLIのPython dependencyは、原則として通常のinstallationだけで
 揃える。一部のcommandでしか使わないdependencyでも、install時間や容量への
 影響が許容範囲なら通常のdependencyに含める。`[context]`などのextraを
 使い分ける手間とREADMEで説明する負担も、dependencyを分けるかの判断に含める。
@@ -250,7 +261,15 @@ extraを設けてよい。その場合は、通常のinstallationで利用でき
 
 この通常のinstallationでは、install時点のcode、package resource、dependencyを
 `uv`が管理するtool環境へinstallする。repository側の変更は自動では反映されない。
-`git pull`などでrepositoryを更新するたびに、更新後の内容を反映するため、
+公開repositoryから更新する場合は、同じURLで次の形式により再インストールする。
+既定branchの最新のpush済み内容が反映される。
+
+```shell
+uv tool install --reinstall git+https://github.com/<owner>/<repository-name>
+<cli-name> --help
+```
+
+clone先からinstallした場合は、`git pull`などでrepositoryを更新するたびに、
 次の形式で再インストールする。
 
 ```shell
@@ -1068,7 +1087,7 @@ uv build
 新しい標準的なPython CLIは、次をすべて満たした時点で基本的な完成とする。
 
 - `uv`でdependencyを解決し、lock fileを再現できる
-- `uv tool install .`でCLIをinstallできる
+- `uv tool install .`でCLIをinstallでき、公開後は`uv tool install git+https://...`でもinstallできる
 - repository外のworking directoryからCLIを実行できる
 - `--help`と`config list`が動作する
 - `config init`がuser-global設定のpathを表示し、編集済み設定を保護する
