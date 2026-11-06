@@ -11,3 +11,5 @@
 - README・CHANGELOG・docsの役割、docs直下への配置、正本と時点を持つ記録の区別を継承。
 - README執筆規約4.1で、公開リポジトリの利用者向けのインストール・更新を、clone不要の `uv tool install git+https://…` と `uv tool install --reinstall git+https://…` を基本とする形に変更。cloneからの `uv tool install .` は未公開時の基本手順か開発の説明に置く。
 - Python CLI開発基本方針5.1を同じ方針に変更し、公開repositoryの通常のinstallation・更新をGitHub URLの形式にした。14章の受入条件に、公開後のGitHub URLからのinstallationを追加。
+- Python CLI開発基本方針6.2で、application IDを「repository名を変更しても安易に変更しない」とした規則を改めた。application IDはGitHubのoriginのrepository名から作り、repository名を変更したときと、名前や役割とかけ離れた・誤解させるときは変更する。変更時はCHANGELOGに旧いdirectory・新しいdirectory・移し方を記載する。例の3行目を `tkn_genai_chat_note` に更新。
+- Python CLI開発基本方針7章に、data・state・cacheの区分がXDG Base Directory Specification（0.8）に倣うことと、stateの基準（dataに置くほど重要でないもの）を追加。4.5・13.2とREADME執筆規約3.1で、評価・調査のレポートや実機検証結果を `.local/state` から `.local/data` へ移し、`.local/state` は実行log・run report・進捗やcheckpointなど、失っても作業の成果が残るものに限った。

@@ -198,8 +198,10 @@ Windowsを主な実行環境としつつ、OS固有機能を必要としない�
 
 - Gitへcommitしないが継続して保持する開発資料は、repository rootの`.local/`へ置く。
   評価・調査レポート、実機検証結果、応答記録、正解メモ、再現用の補助scriptなどを対象とする。
-- 再開に必要な作業資料・保持する生成物・変更前バックアップは `.local/data/<datetime_work-id>/`、
-  レポート・ログ・進捗や再開用stateは `.local/state/<datetime_work-id>/` へ置く。
+- 再開に必要な作業資料・保持する生成物・評価や調査のレポート・実機検証結果・変更前バックアップは
+  `.local/data/<datetime_work-id>/`、実行log・run report・進捗やcheckpointなど、失っても作業の成果が
+  残るものは `.local/state/<datetime_work-id>/` へ置く。dataとstateは7章と同じ基準で分け、
+  迷う場合はdataに置く。
   作業開始時のローカル日時を先頭に付ける（例: `20261012T130200_vision-evaluation`）。
   dataとstateには同じ名前を使い、再開時もそのフォルダを使用する。
   作業名は既定でkebab-case、Pythonのリポジトリ名を使う場合はsnake_case、PowerShell・Windows系のフォルダ名はUpperCamelCaseとする。
@@ -413,9 +415,9 @@ request_timeout_seconds: 30
 
 ### 6.2 application ID
 
-設定とapplication dataのdirectory名には、安定した`snake_case`の
-`<application_id>`を使用する。repository名のprefixが所有者の識別だけを目的とする場合、
-application IDから省略してよい。
+設定とapplication dataのdirectory名には、`snake_case`の`<application_id>`を使用する。
+application IDはrepository名（GitHubのoriginのrepository名。local cloneのfolder名もこれにそろえる）
+から作る。repository名のprefixが所有者の識別だけを目的とする場合、application IDから省略してよい。
 
 例（本リポジトリの作者が公開しているrepository。`tkn_`は所有者の識別だけを目的とするprefix）:
 
@@ -423,9 +425,17 @@ application IDから省略してよい。
 | --- | --- | --- |
 | `tkn_youtube_note_pipeline` | `youtube_note_pipeline` | `tkn-youtube-note` |
 | `tkn_itadaki_data_pipeline` | `itadaki_data_pipeline` | `tkn-itadaki-pipeline` |
-| `tkn_codex_chat_note_pipeline` | `codex_chat_note_pipeline` | `tkn-codex-chat-note` |
+| `tkn_genai_chat_note` | `genai_chat_note` | `tkn-genai-chat-note` |
 
-一度公開したapplication IDは、repository名を変更しても安易に変更しない。
+application IDは利用者の設定・data・cacheの場所を決めるため、理由なく変更しない。
+ただし、次の場合は変更する。
+
+- repository名を変更した場合。application IDも新しいrepository名にそろえる。
+- repository名・application IDが、applicationの名前や役割とかけ離れた場合、または役割を誤解させる場合。
+  repository名を見直し、application IDをそれにそろえる。
+
+application IDを変更するときは、旧いdirectory・新しいdirectory・移し方をCHANGELOGに記載する。
+旧いdirectoryを読む、または移す仕組みを持つかは、利用者の範囲と影響に応じて決める。
 
 ### 6.3 設定の優先順位
 
@@ -504,6 +514,11 @@ application自身が管理するfileは、原則として次のように配置�
 - `state/`: checkpoint、manifest、run report、logなど、再起動後も必要な運用状態
 - `~/.cache/<application_id>/`: 削除しても再取得または再生成できるcache
 - platform標準一時領域: その実行中だけ必要なscratch
+
+data・state・cacheの区分は、[XDG Base Directory Specification](https://specifications.freedesktop.org/basedir/latest/)
+（0.8）に倣う。XDGでは、stateは再起動の後も残すが、dataに置くほど重要でも持ち運ぶものでもないfileであり、
+logや履歴、再開に使う状態を例に挙げる。applicationの成果として後で使う生成物や、失うと作り直せないものは
+dataに置く。保存先は`XDG_*`環境変数やその既定値（`~/.local/share`など）ではなく、上記の場所とする。
 
 次の方針も守る。
 
@@ -1044,7 +1059,8 @@ project自身の詳細文書を置くために、`reference/`をrepository root�
   別名の`.test-tmp-*`などを繰り返し作成しない。
 - test fixtureはGit管理、再利用するcacheやbuild artifactはtoolごとの既定directory、
   確認・保存するtest結果は専用のresultsまたはreports directoryとし、一時領域と区別する。
-  Git管理外でローカルに保持する開発時の結果は、4.5に従い`.local/state/<datetime_work-id>/`へ置く。
+  Git管理外でローカルに保持する開発時の結果は、4.5に従い、後で読み返す結果は
+  `.local/data/<datetime_work-id>/`、実行logなどは`.local/state/<datetime_work-id>/`へ置く。
 - 人が実行する場合と生成AIが実行する場合で基本原則は変えない。生成AIにはfallbackの順序、
   許可するrepository内path、cleanup、再試行の上限を明示し、sandbox userと通常userの
   permissionまたは所有権の差を考慮する。
