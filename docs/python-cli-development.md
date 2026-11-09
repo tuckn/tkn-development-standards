@@ -73,6 +73,9 @@ Windowsを主な実行環境としつつ、OS固有機能を必要としない�
 - subprocessは引数のlistで起動し、shell固有のquoteやcommand chainへの依存を避ける。
 - Windows固有機能が必要な場合は、その境界をmoduleまたは補助スクリプトへ分離し、
   READMEに対応OSと代替手段を記載する。
+- repositoryのfileの改行コード・文字コードは、[改行コード・文字コード規約](line-endings-and-encoding.md)に
+  従う。Python code・設定・文書はLF・BOMなしUTF-8とし、`scripts/`に置くPowerShellなどの
+  Windows専用scriptは、同規約3章のCRLF・文字コードにする。
 - WindowsとLinuxで意味が変わるファイル名、大文字小文字、改行、timezone、
   permissionの差をテストまたは設計レビューで考慮する。
 
@@ -117,6 +120,7 @@ Windowsを主な実行環境としつつ、OS固有機能を必要としない�
 │   └── ...
 ├── scripts/
 ├── docs/
+├── .gitattributes
 ├── .gitignore
 ├── LICENSE
 ├── pyproject.toml
@@ -147,6 +151,8 @@ Windowsを主な実行環境としつつ、OS固有機能を必要としない�
   platform固有の補助処理がある場合だけ使用する。
 - `docs/`は詳細文書が必要な場合に使い、内容が分かるfile名で直下へ置くことを基本にする。
   文書の役割、正本、subfolderへ分ける判断は11.6に従う。空の分類folderは作らない。
+- `.gitattributes`で改行コードを固定する。内容は[改行コード・文字コード規約](line-endings-and-encoding.md)の
+  5章に従い、repositoryにある形式の行だけを置く。
 - runtime data、大きなfixture、credential、実設定はrepositoryへ含めない。
 
 ### 4.3 責務の分離
@@ -1139,6 +1145,8 @@ uv build
 - 複数componentの関係や処理flowを図示する場合、配置依存のアスキーアートではなく
   GitHub互換のMermaidを使用し、複数の言語版がある場合は図の意味も同期している
 - sample configにprivate pathやsecretがない
+- `.gitattributes`で改行コードが固定され、Windows専用のscriptがある場合は、
+  改行コード・文字コード規約3章のCRLF・文字コードになっている
 - 実行時に必要な非code resourceがpackageへ収録され、repository外から利用できる
 - unit test、CLI test、代表的なend-to-end testが成功する
 - lint、type check（採用時）、package buildが成功する

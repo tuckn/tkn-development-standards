@@ -11,8 +11,9 @@ README・CHANGELOG・詳細文書を、人が実装の成果と根拠を確認�
 | Python CLIの新設・大幅な再設計 | [Python CLI開発基本方針](docs/python-cli-development.md) | Windowsを主対象とするPython・uv・src構成、設定、配布、安全性、検証 |
 | README・CHANGELOG・docsの作成や改訂 | [CLIリポジトリREADME執筆規約](docs/readme-writing.md) | 実装言語を問わない情報配置、説明、事実確認、更新手順 |
 | YAML設定・Frontmatter・文書内YAML例の作成や修正 | [YAML記述規約](docs/yaml-style.md) | 実装言語を問わない日時、引用符、型、識別子、パス、移行時の情報保持 |
+| テキストファイルの作成・編集、`.gitattributes` の設定 | [改行コード・文字コード規約](docs/line-endings-and-encoding.md) | 実装言語を問わないLF・UTF-8の基本と、Windows専用の形式（BAT・CMD、PowerShell、AutoHotkey、WSH、VBA）のCRLF・文字コード |
 
-README・YAMLの規約を使うために、Pythonの規約全体を採用する必要はありません。
+README・YAML・改行コードの規約を使うために、Pythonの規約全体を採用する必要はありません。
 Node.jsなど他の実行環境の規約は、具体的な共通要件がまとまった時点で追加します。
 
 ## 対象プロジェクトへの適用
@@ -38,5 +39,5 @@ Node.jsなど他の実行環境の規約は、具体的な共通要件がまと�
 
 ## 現在の状態
 
-共通規約3文書を収録した初期版です。実装言語をまたいで利用できるREADME・YAML規約と、Python固有の開発規約を分けています。
+共通規約4文書を収録した初期版です。実装言語をまたいで利用できるREADME・YAML・改行コードの規約と、Python固有の開発規約を分けています。
 GitHubへの文書の反映は別途行います。配布ライセンスは未設定です。
