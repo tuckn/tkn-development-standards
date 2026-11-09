@@ -198,12 +198,16 @@ Windowsを主な実行環境としつつ、OS固有機能を必要としない�
 
 - Gitへcommitしないが継続して保持する開発資料は、repository rootの`.local/`へ置く。
   評価・調査レポート、実機検証結果、応答記録、正解メモ、再現用の補助scriptなどを対象とする。
-- 再開に必要な作業資料・保持する生成物・評価や調査のレポート・実機検証結果・変更前バックアップは
+- 再開に必要な作業資料・保持する生成物・評価や調査のレポート・実機検証結果は
   `.local/data/<datetime_work-id>/`、実行log・run report・進捗やcheckpointなど、失っても作業の成果が
   残るものは `.local/state/<datetime_work-id>/` へ置く。dataとstateは7章と同じ基準で分け、
   迷う場合はdataに置く。
-  作業開始時のローカル日時を先頭に付ける（例: `20261012T130200_vision-evaluation`）。
-  dataとstateには同じ名前を使い、再開時もそのフォルダを使用する。
+- fileを変更・削除する前に取る控え（変更前バックアップ）は `.local/backups/<datetime_work-id>/` へ置き、
+  dataに混ぜない。後で必要な資料と、時間が経てば削除できる控えを区別するためである。
+  どのfileの控えか分かるように、元の相対pathか名前を保つ。控えは、変更を確認した後
+  （Git管理のfileならcommitした後）は削除してよい候補となる。削除は下記の`.local/`の規則に従う。
+- 作業開始時のローカル日時を先頭に付ける（例: `20261012T130200_vision-evaluation`）。
+  data・backups・stateには同じ名前を使い、再開時もそのフォルダを使用する。
   作業名は既定でkebab-case、Pythonのリポジトリ名を使う場合はsnake_case、PowerShell・Windows系のフォルダ名はUpperCamelCaseとする。
 - 開発支援ツールの再取得・再生成可能なcacheは、そのツール用のcache領域へ置く。唯一の原本や人が編集した資料を置かない。
   開発支援ツールの実行中だけ必要なscratchはOS標準一時領域の実行専用ディレクトリを使う。
