@@ -16,3 +16,4 @@
 - Python CLI開発基本方針4.5とREADME執筆規約3.1で、変更前バックアップの置き場を `.local/data` から `.local/backups/<datetime_work-id>/` に分けた。後で必要な資料と、変更を確認した後に削除できる控えを区別するため。data・backups・stateには同じ作業名を使う。
 - 改行コード・文字コード規約（`docs/line-endings-and-encoding.md`）を追加。テキストファイルはLF・BOMなしのUTF-8を基本とし、BAT・CMD（`.bat`・`.cmd`）、PowerShell（`.ps1`・`.psm1`・`.psd1`）、AutoHotkey（`.ahk`）、WSH（`.vbs`・`.wsf`・WSH用の `.js`）、VBAのエクスポート（`.bas`・`.cls`・`.frm`）はCRLFとした。各形式の文字コード（BOM付きUTF-8・CP932など）、`.gitattributes` の例、編集時の確認、実機で確かめた環境を収録。PowerShellは版を問わずCRLFとし、Linux・macOSでshebangから起動するスクリプトだけLFとする。`.js` は既定でLFとし、WSH用だけをパスで指定する。
 - Python CLI開発基本方針の3.3・4.2・14章とYAML記述規約の6章から、改行コード・文字コード規約を参照するようにした。標準リポジトリ構成に `.gitattributes` を追加。
+- コードで描くモーショングラフィックス動画の制作ガイドライン（`docs/motion-graphics-video-production.md`）を追加。1分の紹介動画を3版作った経験から、品質を決めたもの、関門と採点、確かめる道具、時刻だけで描く作り方と決定性の落とし穴、場面のつなぎ・製品の画面・文字の見た目、読む時間の目安、書き出し（別のブラウザーで並べて撮る、動きのぶれ、BT.709の色の印）、音、参照の動画の渡し方、動画用の枠組みを入れるかの判断をまとめた。規約ではなく、実例1本で確かめた目安とした。
