@@ -2,11 +2,7 @@
 
 新しくスクリプト・CLIを作るとき、どの言語で書くかを決める順番を定めます。
 人や生成AIが、同じ種類の処理を作るたびに違う言語を選ばないようにするための指針です。
-
-> [!NOTE]
-> 2026-11-13時点の草案です。
-> 実際に作るスクリプトで確かめながら改めます。
-> まだ決まっていない点は、9章にまとめています。
+まだ決まっていない点は、9章にまとめています。
 
 ## 1. 位置付けと適用範囲
 
@@ -101,6 +97,10 @@ PowerShellで書くときは、次のことを守ります。
 
 - 「インストールなしで動く」ことを理由に選ぶなら、Windowsに初めから入っているWindows PowerShell 5.1で動くように書きます。
   PowerShell 7は、5.1とは別に入れる必要があります。
+- それ以外は、PowerShell 7を前提にしてかまいません。
+  PowerShell 7が入っているPCでだけ動かすものまで5.1に合わせると、2つの版の違いを避ける手間だけが増えるためです。
+  そのときは、スクリプトの先頭に `#Requires -Version 7` を書き、READMEにも要る版を書きます。
+  Windows PowerShell 5.1で実行すると、`#Requires` の行で止まり、要る版が表示されます。
 - 改行コードはCRLFにし、日本語などASCII以外の文字を含むならBOM付きUTF-8にします（[改行コード・文字コード規約](line-endings-and-encoding.md)の3章）。
 
 ## 5. Node.jsにするとき
@@ -170,10 +170,9 @@ Node.jsで書いた共通の整形処理を、CLIとしてPythonから呼ぶ。
 
 ## 9. まだ決まっていない点
 
-草案のため、次の点は、実例で確かめてから決めます。
+次の点は、実例で確かめてから決めます。
 
 - PowerShellからPythonへ移す目安（100行）が合っているか。
-- PowerShellで書くとき、Windows PowerShell 5.1で動かすことを必須にするか。PowerShell 7を前提にしてよい場面を決めるか。
 - Node.jsで外部パッケージを使うとき、`node_modules` の置き場をどう決めるか。
 - TypeScriptを使うか。使うなら、どの場面で使うか。
 
@@ -186,5 +185,6 @@ Node.jsで書いた共通の整形処理を、CLIとしてPythonから呼ぶ。
 - uvのinline script metadata：3章の例の先頭を書いたスクリプトを `uv run` で実行すると、uvがopenpyxl 3.1.5を入れた環境で動かしました。
   uvのドキュメント [Declaring script dependencies](https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies) と [PEP 723](https://peps.python.org/pep-0723/) に、この書き方があります。
 - PowerShellの版：このPCでは、Windows PowerShell 5.1（`powershell.exe`）とPowerShell 7（`pwsh.exe`）が別々に入っています。
+  先頭に `#Requires -Version 7` を書いたスクリプトは、Windows PowerShell 5.1では「Windows PowerShell 7.0を要る」という旨のエラーで止まり、PowerShell 7では動きました。
   Microsoftのドキュメント [Differences between Windows PowerShell 5.1 and PowerShell 7.x](https://learn.microsoft.com/powershell/scripting/whats-new/differences-from-windows-powershell) に、2つの版の違いがまとめられています。
 - VBScript：Microsoftは、2024年5月の [VBScript deprecation: Timelines and next steps](https://techcommunity.microsoft.com/blog/windows-itpro-blog/vbscript-deprecation-timelines-and-next-steps/4148301) で、Windows 11 24H2からVBScriptをオンデマンド機能（初めは有効）にし、2027年ごろに既定で無効にし、その後のWindowsから取り除く、と告知しています。
