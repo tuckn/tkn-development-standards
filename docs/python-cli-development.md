@@ -990,20 +990,16 @@ project自身の詳細文書を置くために、`reference/`をrepository root�
 
 ### 11.7 CHANGELOG
 
-標準的なCLI repositoryには、repository rootに`CHANGELOG.md`を作成し、
-利用者から見た変更履歴を継続して更新する。READMEの入口からlinkする。
-新規projectでは最初のversionの主な機能を記録する。既存projectでは、
-確認できるGit履歴とversion情報に基づいて履歴を整理し、根拠のない公開日や変更点を補わない。
+repository rootに`CHANGELOG.md`を作成し、利用者から見た変更履歴を継続して更新する。
+READMEの入口からlinkする。置く条件、作るとき、`Unreleased`と版の節の書き方、
+既存projectでの作り方は、[CHANGELOG規約](changelog-writing.md)に従う。
+CLI repositoryでは、次も守る。
 
-- 未リリースの変更は`Unreleased`に記録し、正式なversionと公開日が確定した時点で
-  そのversionの節へ移す。開発中の変更に未決定のversion番号や公開日を付けない。
+- 新規projectでは、最初のversionの主な機能を記録する。
 - 機能追加、動作変更、bug修正、非互換変更を、利用者への影響が分かる言葉で記す。
   CLI option、設定schema、出力形式、保存先、依存環境が変わる場合は、必要な
   migration、再installation、automation修正も明記する。
-- READMEには現在の使い方と必要な注意を保ち、変更の経緯はCHANGELOGに記す。
-  commit messageの羅列や内部的な作業記録で代用しない。
-- 実装と同じ作業で該当する変更履歴を更新し、version更新やreleaseの前に内容と日付を確認する。
-  根拠が不十分な過去versionは推測で埋めず、確認できた範囲を明示する。
+- version更新やreleaseの前に、内容と日付を確認する。
 
 ## 12. Public repository hygiene
 
