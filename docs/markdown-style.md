@@ -43,7 +43,7 @@ READMEの章構成と見出しの名前の付け方は [CLIリポジトリREADME
 ## 4. 太字の1行を見出しの代わりにしない
 
 - 節を分けるのに、太字だけの1行を使いません。
-  道具が文書の構造を読み取れなくなるためです（markdownlintのMD036）。
+  ツールが文書の構造を読み取れなくなるためです（markdownlintのMD036）。
   見出しにするか、3章のようにリストの項目にします。
 - 太字のラベルの次の行からリストを書く形（`**Background**:` の直後に `- …`）も使いません。
   - 空行がないと、パーサーによってはリストとして読まれません。
@@ -57,7 +57,7 @@ READMEの章構成と見出しの名前の付け方は [CLIリポジトリREADME
 
 2026-11-13に確かめました。
 
-- markdownlintの [MD036（no-emphasis-as-heading）](https://github.com/DavidAnson/markdownlint/blob/main/doc/md036.md)：節を分けるのに強調を使うと、道具が文書の構造を推し量れない、としています。
+- markdownlintの [MD036（no-emphasis-as-heading）](https://github.com/DavidAnson/markdownlint/blob/main/doc/md036.md)：節を分けるのに強調を使うと、ツールが文書の構造を推し量れない、としています。
   既定の `punctuation` は `.,;:!?。，；：！？` です。
 - markdownlintの [MD032（blanks-around-lists）](https://github.com/DavidAnson/markdownlint/blob/main/doc/md032.md)：kramdownなど一部のパーサーは、前後に空行のないリストを読まない、としています。
 - pandoc 3.9.0.2：`**Background**:` の次の行に `- item one` を書いた入力は、`-f markdown` では `<p><strong>Background</strong>: - item one …</p>` という1つの段落になり、`-f gfm` ではリストになりました。
